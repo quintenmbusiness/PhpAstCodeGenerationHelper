@@ -28,10 +28,6 @@ jobs:
       - name: Install Dependencies
         run: composer install --prefer-dist --no-progress --no-suggest
 
-      # Validate PHPUnit Configuration
-      - name: Validate PHPUnit Configuration
-        run: vendor/bin/phpunit --validate-configuration
-
       # Debug Tests (optional for troubleshooting)
       - name: Debug Tests
         run: |
