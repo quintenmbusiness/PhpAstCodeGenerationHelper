@@ -47,9 +47,9 @@ class VariableGenerationHelperTest extends TestCase
     }
 
     #[Test]
-    public function new_class(): void
+    public function new(): void
     {
-        $result = $this->helper->newClass('SomeClass');
+        $result = $this->helper->new('SomeClass');
 
         $this->assertInstanceOf(New_::class, $result);
         $this->assertSame('SomeClass', $result->class->toString());

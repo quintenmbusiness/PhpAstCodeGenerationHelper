@@ -41,7 +41,7 @@ class BasicGenerationHelper
      */
     public function addVisibility(Method|Property $stmt, string $visibility = 'public'): Method|Property
     {
-        return match ($visibility) {
+        match ($visibility) {
             'public' => $stmt->makePublic(),
             'protected' => $stmt->makeProtected(),
             'private' => $stmt->makePrivate(),
@@ -50,5 +50,7 @@ class BasicGenerationHelper
             'final' => $stmt->makeFinal(),
             default => $stmt,
         };
+
+        return $stmt;
     }
 }

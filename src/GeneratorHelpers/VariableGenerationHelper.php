@@ -46,7 +46,7 @@ class VariableGenerationHelper extends BasicGenerationHelper
      * @param  string $name
      * @return New_
      */
-    public function newClass(string $name): New_
+    public function new(string $name): New_
     {
         return new New_(new Name($name));
     }

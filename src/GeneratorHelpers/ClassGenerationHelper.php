@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Quintenm\PhpAstCodeGenerationHelper\GeneratorHelpers;
 
 use PhpParser\BuilderFactory;
-use PhpParser\Builder\Property;
 
 class ClassGenerationHelper extends MethodGenerationHelper
 {
