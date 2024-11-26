@@ -1,6 +1,11 @@
 
 # PHP AST Code Generation Helper
 
+[![Latest Stable Version](https://img.shields.io/packagist/v/quintenm/php-ast-code-generation-helper)](https://packagist.org/packages/quintenm/php-ast-code-generation-helper)
+[![Total Downloads](https://img.shields.io/packagist/dt/quintenm/php-ast-code-generation-helper)](https://packagist.org/packages/quintenm/php-ast-code-generation-helper)
+[![License](https://img.shields.io/github/license/quintenmbusiness/PhpAstCodeGenerationHelper)](https://github.com/quintenmbusiness/PhpAstCodeGenerationHelper/blob/main/LICENSE)
+[![Coverage Status](https://coveralls.io/repos/github/quintenmbusiness/PhpAstCodeGenerationHelper/badge.svg?branch=main)](https://coveralls.io/github/quintenmbusiness/PhpAstCodeGenerationHelper?branch=main)
+
 ---
 
 ### **Introduction**
@@ -31,21 +36,28 @@ composer require quintenm/php-ast-code-generation-helper
 For development environments:
 
 ```bash
-composer require --dev  quintenm/php-ast-code-generation-helper
+composer require --dev quintenm/php-ast-code-generation-helper
 ```
 
 ---
 
 ## **Quick Start**
 
-Here’s a quick guide to get you started.
+Here’s a quick guide to get you started:
 
-
+---
 
 ## **Usage**
 
-The core utility methods include:
+---
 
+## **Stats**
+
+### Packagist Statistics
+- **Total Downloads**: ![Total Downloads](https://img.shields.io/packagist/dt/quintenm/php-ast-code-generation-helper)
+- **Monthly Downloads**: ![Monthly Downloads](https://img.shields.io/packagist/dm/quintenm/php-ast-code-generation-helper)
+
+---
 
 ## **Contributing**
 
@@ -56,6 +68,14 @@ We welcome contributions! Please submit a pull request or open an issue for any 
 3. Commit your changes: `git commit -am 'Add new feature'`.
 4. Push to the branch: `git push origin feature/your-feature`.
 5. Open a pull request.
+
+---
+
+## **Support**
+
+If you find this package useful, consider supporting its development:
+- [GitHub Sponsors](https://github.com/sponsors/quintenmbusiness)
+- [PayPal](https://www.paypal.me/quintenmbusiness)
 
 ---
 

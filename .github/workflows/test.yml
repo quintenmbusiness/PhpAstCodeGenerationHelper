@@ -68,3 +68,9 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./coverage
+
+      - name: Coveralls GitHub Action
+        uses: coverallsapp/github-action@v2.3.4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          path-to-lcov: coverage.xml
