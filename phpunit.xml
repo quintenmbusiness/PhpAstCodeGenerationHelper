@@ -8,9 +8,9 @@
             <directory>tests</directory>
         </testsuite>
     </testsuites>
-    <coverage>
-        <whitelist>
+    <coverage processUncoveredFiles="true">
+        <include>
             <directory>src</directory>
-        </whitelist>
+        </include>
     </coverage>
 </phpunit>

@@ -21,11 +21,22 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.1'
+          coverage: xdebug
           extensions: mbstring, pdo, pdo_mysql
 
       # Install dependencies
       - name: Install Dependencies
         run: composer install --prefer-dist --no-progress --no-suggest
+
+      # Validate PHPUnit Configuration
+      - name: Validate PHPUnit Configuration
+        run: vendor/bin/phpunit --validate-configuration
+
+      # Debug Tests (optional for troubleshooting)
+      - name: Debug Tests
+        run: |
+          ls -la tests
+          vendor/bin/phpunit --list-tests
 
       # Run PHPStan
       - name: Run PHPStan
@@ -33,6 +44,8 @@ jobs:
 
       # Run PHPUnit Tests with Coverage
       - name: Run PHPUnit Tests with Coverage
+        env:
+          XDEBUG_MODE: coverage
         run: |
           vendor/bin/phpunit --coverage-text --coverage-clover=coverage.xml
 
