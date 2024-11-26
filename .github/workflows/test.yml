@@ -1,0 +1,44 @@
+name: Run Tests and Static Analysis
+
+on:
+  push:
+    branches:
+      - master
+      - development
+  pull_request:
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the code
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      # Set up PHP
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.0'
+          extensions: mbstring, pdo, pdo_mysql
+
+      # Install dependencies
+      - name: Install Dependencies
+        run: composer install --prefer-dist --no-progress --no-suggest
+
+      # Run PHPStan
+      - name: Run PHPStan
+        run: vendor/bin/phpstan analyse
+
+      # Run PHPUnit Tests with Coverage
+      - name: Run PHPUnit Tests with Coverage
+        run: |
+          vendor/bin/phpunit --coverage-text --coverage-clover=coverage.xml
+
+      # Upload coverage report as an artifact
+      - name: Upload Coverage Report
+        uses: actions/upload-artifact@v3
+        with:
+          name: coverage-report
+          path: coverage.xml
