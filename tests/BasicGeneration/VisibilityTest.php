@@ -11,7 +11,7 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Quintenm\PhpAstCodeGenerationHelper\GeneratorHelpers\BasicGenerationHelper;
 
-class VisibilityTests extends TestCase
+class VisibilityTest extends TestCase
 {
     /**
      * @var BasicGenerationHelper
