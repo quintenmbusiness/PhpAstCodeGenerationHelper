@@ -53,8 +53,16 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: coverage-report
-          path: coverage.xm
+          path: coverage.xml
 
+      # Generate HTML Coverage Report
+      - name: Generate HTML Coverage Report
+        env:
+          XDEBUG_MODE: coverage
+        run: |
+          vendor/bin/phpunit --coverage-html=coverage/
+
+      # Publish Coverage to GitHub Pages
       - name: Publish Coverage to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
