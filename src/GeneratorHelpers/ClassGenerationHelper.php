@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace quintenmbusiness\PhpAstCodeGenerationHelper\GeneratorHelpers;
 
+use InvalidArgumentException;
 use PhpParser\Builder\Class_;
 use PhpParser\Builder\Namespace_;
 use PhpParser\Builder\Property;
@@ -62,9 +63,22 @@ class ClassGenerationHelper extends MethodGenerationHelper
      * @param string $visibility
      * @param mixed|null $default
      * @return Property
+     * @throws InvalidArgumentException if the visibility, type, or default value is invalid.
      */
     public function createClassProperty(string $name, ?string $type = null, string $visibility = 'public', mixed $default = null): Property
     {
+        if (!in_array($visibility, ['public', 'protected', 'private'])) {
+            throw new InvalidArgumentException('Invalid visibility provided: ' . $visibility);
+        }
+
+        if ($type !== null && !in_array($type, ['string', 'int', 'bool', 'float', 'array', 'object'])) {
+            throw new InvalidArgumentException('Invalid type provided: ' . $type);
+        }
+
+        if ($default !== null && !$this->isValidDefault($type, $default)) {
+            throw new InvalidArgumentException('Invalid default value for type: ' . $type);
+        }
+
         $property = $this->factory->property($name);
 
         if ($type !== null) {
@@ -198,7 +212,7 @@ class ClassGenerationHelper extends MethodGenerationHelper
             if ($param['type'] !== null) {
                 $methodParam->setType($param['type']);
             }
-            if (array_key_exists('default', $param) && $param['default'] !== null) {
+            if ($param['default'] !== null) { // No need for array_key_exists
                 $methodParam->setDefault($this->convertToAstNode($param['default']));
             }
             $constructor->addParam($methodParam);

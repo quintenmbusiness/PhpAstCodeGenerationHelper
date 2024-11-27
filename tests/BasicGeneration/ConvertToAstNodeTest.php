@@ -6,9 +6,10 @@ namespace BasicGeneration;
 
 use PhpParser\BuilderFactory;
 use PhpParser\Node\Expr\Array_;
+use PhpParser\Node\Expr\ConstFetch;
+use PhpParser\Node\Name;
 use PhpParser\Node\Scalar\LNumber;
 use PhpParser\Node\Scalar\String_;
-use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use quintenmbusiness\PhpAstCodeGenerationHelper\GeneratorHelpers\BasicGenerationHelper;
 
@@ -21,39 +22,80 @@ class ConvertToAstNodeTest extends TestCase
         $this->helper = new BasicGenerationHelper(new BuilderFactory());
     }
 
-    #[Test]
-    public function it_converts_integer_to_lnumber(): void
+    /**
+     * @dataProvider validAstNodeProvider
+     */
+    public function testConvertsValidValuesToAstNodes(mixed $value, string $expectedClass, mixed $expectedValue = null): void
     {
-        $result = $this->helper->convertToAstNode(42);
+        $result = $this->helper->convertToAstNode($value);
 
-        $this->assertInstanceOf(LNumber::class, $result);
-        $this->assertEquals(42, $result->value);
+        $this->assertInstanceOf($expectedClass, $result);
+
+        if ($result instanceof LNumber || $result instanceof String_) {
+            $this->assertSame($expectedValue, $result->value);
+        } elseif ($result instanceof ConstFetch) {
+            $this->assertSame($expectedValue, $result->name->toString());
+        } elseif ($result instanceof Array_) {
+            $this->assertInstanceOf(Array_::class, $result);
+        }
     }
 
-    #[Test]
-    public function it_converts_string_to_string_node(): void
+    /**
+     * Provides valid values and their expected AST node types and values.
+     *
+     * @return array<int, array{mixed, string, mixed|null}>
+     */
+    public static function validAstNodeProvider(): array
     {
-        $result = $this->helper->convertToAstNode('string');
+        return [
+            // Integers
+            [42, LNumber::class, 42],
+            [-7, LNumber::class, -7],
 
-        $this->assertInstanceOf(String_::class, $result);
-        $this->assertEquals('string', $result->value);
+            // Strings
+            ['test', String_::class, 'test'],
+            ['hello world', String_::class, 'hello world'],
+
+            // Arrays
+            [[], Array_::class],
+            [['key' => 'value', 42], Array_::class],
+
+            // Booleans
+            [true, ConstFetch::class, 'true'],
+            [false, ConstFetch::class, 'false'],
+        ];
     }
 
-    #[Test]
-    public function it_converts_array_to_array_node(): void
-    {
-        $array = ['key' => 'value', 42];
-        $result = $this->helper->convertToAstNode($array);
-
-        $this->assertInstanceOf(Array_::class, $result);
-    }
-
-    #[Test]
-    public function it_throws_exception_for_unsupported_type(): void
+    /**
+     * @dataProvider invalidAstNodeProvider
+     */
+    public function testThrowsExceptionForInvalidValues(mixed $value, string $expectedMessage): void
     {
         $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage('Unsupported value type for AST conversion.');
+        $this->expectExceptionMessage($expectedMessage);
 
-        $this->helper->convertToAstNode(new \stdClass());
+        $this->helper->convertToAstNode($value);
+    }
+
+    /**
+     * Provides invalid values and their expected exception messages.
+     *
+     * @return array<int, array{mixed, string}>
+     */
+    public static function invalidAstNodeProvider(): array
+    {
+        return [
+            // Objects
+            [new \stdClass(), 'Unsupported value type for AST conversion: object'],
+
+            // Resources
+            [fopen('php://memory', 'r'), 'Unsupported value type for AST conversion: resource'],
+
+            // Null
+            [null, 'Unsupported value type for AST conversion: NULL'],
+
+            // Floats
+            [3.14, 'Unsupported value type for AST conversion: double'],
+        ];
     }
 }

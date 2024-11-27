@@ -12,6 +12,8 @@ use PhpParser\Builder\Property;
 use PhpParser\Node\Expr\Array_;
 use PhpParser\Node\Expr\ArrayItem;
 use PhpParser\Node\Expr\Cast\Bool_;
+use PhpParser\Node\Expr\ConstFetch;
+use PhpParser\Node\Name;
 use PhpParser\Node\Scalar\String_;
 use PhpParser\Node\Scalar\LNumber;
 use PhpParser\Node\Stmt\Return_;
@@ -148,15 +150,33 @@ class BasicGenerationHelper
      * Converts a PHP value to an AST node.
      *
      * @param mixed $value
-     * @return Array_|LNumber|String_
+     * @return Array_|LNumber|String_|ConstFetch
      */
-    public function convertToAstNode(mixed $value): Array_|LNumber|String_
+    public function convertToAstNode(mixed $value): Array_|LNumber|String_|ConstFetch
     {
         return match (true) {
             is_int($value) => new LNumber($value),
             is_string($value) => new String_($value),
             is_array($value) => $this->createArray($value),
-            default => throw new \InvalidArgumentException('Unsupported value type for AST conversion.'),
+            is_bool($value) => new ConstFetch(new Name($value ? 'true' : 'false')),
+            default => throw new \InvalidArgumentException('Unsupported value type for AST conversion: ' . gettype($value)),
+        };
+    }
+
+    /**
+     * @param string|null $type
+     * @param mixed $default
+     * @return bool
+     */
+    public function isValidDefault(?string $type, mixed $default): bool
+    {
+        return match ($type) {
+            'int' => is_int($default),
+            'string' => is_string($default),
+            'bool' => is_bool($default),
+            'float' => is_float($default),
+            'array' => is_array($default),
+            default => false,
         };
     }
 }
