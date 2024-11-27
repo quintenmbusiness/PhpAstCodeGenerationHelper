@@ -1,5 +1,5 @@
 {
-    "name": "quintenm/php-ast-code-generation-helper",
+    "name": "quintenmbusiness/php-ast-code-generation-helper",
     "type": "library",
     "require": {
         "php": ">=8.1",
@@ -8,7 +8,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Quintenm\\PhpAstCodeGenerationHelper\\": "src/"
+            "quintenmbusiness\\PhpAstCodeGenerationHelper\\": "src/"
         }
     },
     "authors": [

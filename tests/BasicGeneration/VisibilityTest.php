@@ -9,7 +9,7 @@ use PhpParser\Builder\Method;
 use PhpParser\Builder\Property;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Quintenm\PhpAstCodeGenerationHelper\GeneratorHelpers\BasicGenerationHelper;
+use quintenmbusiness\PhpAstCodeGenerationHelper\GeneratorHelpers\BasicGenerationHelper;
 
 class VisibilityTest extends TestCase
 {

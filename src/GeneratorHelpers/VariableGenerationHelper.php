@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Quintenm\PhpAstCodeGenerationHelper\GeneratorHelpers;
+namespace quintenmbusiness\PhpAstCodeGenerationHelper\GeneratorHelpers;
 
 use PhpParser\Node\Expr;
 use PhpParser\Node\Name;

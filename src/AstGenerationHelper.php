@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Quintenm\PhpAstCodeGenerationHelper;
+namespace quintenmbusiness\PhpAstCodeGenerationHelper;
 
 use PhpParser\BuilderFactory;
-use Quintenm\PhpAstCodeGenerationHelper\GeneratorHelpers\ClassGenerationHelper;
+use quintenmbusiness\PhpAstCodeGenerationHelper\GeneratorHelpers\ClassGenerationHelper;
 
 class AstGenerationHelper extends ClassGenerationHelper
 {

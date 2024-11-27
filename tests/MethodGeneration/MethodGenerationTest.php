@@ -10,7 +10,7 @@ use PhpParser\Node\Identifier;
 use PhpParser\Node\Name;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Quintenm\PhpAstCodeGenerationHelper\GeneratorHelpers\MethodGenerationHelper;
+use quintenmbusiness\PhpAstCodeGenerationHelper\GeneratorHelpers\MethodGenerationHelper;
 
 class MethodGenerationTest extends TestCase
 {

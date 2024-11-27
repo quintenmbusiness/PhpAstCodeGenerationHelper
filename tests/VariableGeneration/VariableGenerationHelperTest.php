@@ -11,7 +11,7 @@ use PhpParser\Node\Expr\PropertyFetch;
 use PhpParser\Node\Expr\Variable;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Quintenm\PhpAstCodeGenerationHelper\GeneratorHelpers\VariableGenerationHelper;
+use quintenmbusiness\PhpAstCodeGenerationHelper\GeneratorHelpers\VariableGenerationHelper;
 
 class VariableGenerationHelperTest extends TestCase
 {

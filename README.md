@@ -1,10 +1,10 @@
 
 # PHP AST Code Generation Helper
 
-[![Latest Stable Version](https://img.shields.io/packagist/v/quintenm/php-ast-code-generation-helper)](https://packagist.org/packages/quintenm/php-ast-code-generation-helper)
-[![Total Downloads](https://img.shields.io/packagist/dt/quintenm/php-ast-code-generation-helper)](https://packagist.org/packages/quintenm/php-ast-code-generation-helper)
+[![Latest Stable Version](https://img.shields.io/packagist/v/quintenmbusiness/php-ast-code-generation-helper)](https://packagist.org/packages/quintenmbusiness/php-ast-code-generation-helper)
+[![Total Downloads](https://img.shields.io/packagist/dt/quintenmbusiness/php-ast-code-generation-helper)](https://packagist.org/packages/quintenmbusiness/php-ast-code-generation-helper)
 [![License](https://img.shields.io/github/license/quintenmbusiness/PhpAstCodeGenerationHelper)](https://github.com/quintenmbusiness/PhpAstCodeGenerationHelper/blob/main/LICENSE)
-[![Coverage Status](https://coveralls.io/repos/github/quintenmbusiness/PhpAstCodeGenerationHelper/badge.svg?branch=main)](https://coveralls.io/github/quintenmbusiness/PhpAstCodeGenerationHelper?branch=main)
+[![Coverage Status](https://coveralls.io/repos/github/quintenmbusiness/PhpAstCodeGenerationHelper/badge.svg)](https://coveralls.io/github/quintenmbusiness/PhpAstCodeGenerationHelper)
 
 ---
 
@@ -30,13 +30,13 @@ Whether you're building a code generation tool, refactoring engine, or education
 Install the package via Composer:
 
 ```bash
-composer require quintenm/php-ast-code-generation-helper
+composer require quintenmbusiness/php-ast-code-generation-helper
 ```
 
 For development environments:
 
 ```bash
-composer require --dev quintenm/php-ast-code-generation-helper
+composer require --dev quintenmbusiness/php-ast-code-generation-helper
 ```
 
 ---
@@ -54,8 +54,8 @@ Here’s a quick guide to get you started:
 ## **Stats**
 
 ### Packagist Statistics
-- **Total Downloads**: ![Total Downloads](https://img.shields.io/packagist/dt/quintenm/php-ast-code-generation-helper)
-- **Monthly Downloads**: ![Monthly Downloads](https://img.shields.io/packagist/dm/quintenm/php-ast-code-generation-helper)
+- **Total Downloads**: ![Total Downloads](https://img.shields.io/packagist/dt/quintenmbusiness/php-ast-code-generation-helper)
+- **Monthly Downloads**: ![Monthly Downloads](https://img.shields.io/packagist/dm/quintenmbusiness/php-ast-code-generation-helper)
 
 ---
 
@@ -75,7 +75,6 @@ We welcome contributions! Please submit a pull request or open an issue for any 
 
 If you find this package useful, consider supporting its development:
 - [GitHub Sponsors](https://github.com/sponsors/quintenmbusiness)
-- [PayPal](https://www.paypal.me/quintenmbusiness)
 
 ---
 
