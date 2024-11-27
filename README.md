@@ -2,7 +2,7 @@
 
 [![Latest Stable Version](https://img.shields.io/packagist/v/quintenmbusiness/php-ast-code-generation-helper)](https://packagist.org/packages/quintenmbusiness/php-ast-code-generation-helper)  
 [![Total Downloads](https://img.shields.io/packagist/dt/quintenmbusiness/php-ast-code-generation-helper)](https://packagist.org/packages/quintenmbusiness/php-ast-code-generation-helper)  
-[![License](https://img.shields.io/github/license/quintenmbusiness/PhpAstCodeGenerationHelper)](https://github.com/quintenmbusiness/PhpAstCodeGenerationHelper/blob/master/LICENSE.md)  
+[![License](https://img.shields.io/github/license/quintenmbusiness/PhpAstCodeGenerationHelper)](https://github.com/quintenmbusiness/PhpAstCodeGenerationHelper/blob/master/LICENSE)  
 [![Coverage Status](https://coveralls.io/repos/github/quintenmbusiness/PhpAstCodeGenerationHelper/badge.svg)](https://coveralls.io/github/quintenmbusiness/PhpAstCodeGenerationHelper)
 
 ---
