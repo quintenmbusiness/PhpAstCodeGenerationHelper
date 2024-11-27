@@ -1,6 +1,7 @@
 {
     "name": "quintenmbusiness/php-ast-code-generation-helper",
     "type": "library",
+    "license": "MIT",
     "require": {
         "php": ">=8.1",
         "nikic/php-parser": "^5.3",
