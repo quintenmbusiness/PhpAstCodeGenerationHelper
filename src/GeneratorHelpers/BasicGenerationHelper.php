@@ -13,6 +13,7 @@ use PhpParser\Node\Expr\Array_;
 use PhpParser\Node\Expr\ArrayItem;
 use PhpParser\Node\Expr\Cast\Bool_;
 use PhpParser\Node\Expr\ConstFetch;
+use PhpParser\Node\Expr\Variable;
 use PhpParser\Node\Name;
 use PhpParser\Node\Scalar\String_;
 use PhpParser\Node\Scalar\LNumber;
@@ -125,7 +126,7 @@ class BasicGenerationHelper
     {
         $arguments = [];
         foreach ($args as $value) {
-            $arguments[] = new Arg($this->convertToAstNode($value));
+            $arguments[] = new Arg($value instanceof Expr ? $value : $this->convertToAstNode($value));
         }
         return $arguments;
     }
@@ -140,7 +141,8 @@ class BasicGenerationHelper
     {
         $arrayItems = [];
         foreach ($items as $key => $value) {
-            $arrayItems[] = new ArrayItem($this->convertToAstNode($value));
+            $keyNode = is_int($key) ? null : $this->convertToAstNode($key);
+            $arrayItems[] = new ArrayItem($this->convertToAstNode($value), $keyNode);
         }
 
         return new Array_($arrayItems);
@@ -150,18 +152,22 @@ class BasicGenerationHelper
      * Converts a PHP value to an AST node.
      *
      * @param mixed $value
-     * @return Array_|LNumber|String_|ConstFetch
+     * @return Array_|LNumber|String_|ConstFetch|Variable
+     * @throws \InvalidArgumentException
      */
-    public function convertToAstNode(mixed $value): Array_|LNumber|String_|ConstFetch
+    public function convertToAstNode(mixed $value): Array_|LNumber|String_|ConstFetch|Variable
     {
         return match (true) {
             is_int($value) => new LNumber($value),
             is_string($value) => new String_($value),
             is_array($value) => $this->createArray($value),
             is_bool($value) => new ConstFetch(new Name($value ? 'true' : 'false')),
+            $value instanceof Variable => $value,
+            $value === null => new ConstFetch(new Name('null')), // Handle null as ConstFetch
             default => throw new \InvalidArgumentException('Unsupported value type for AST conversion: ' . gettype($value)),
         };
     }
+
 
     /**
      * @param string|null $type

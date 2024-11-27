@@ -7,6 +7,7 @@ namespace BasicGeneration;
 use PhpParser\BuilderFactory;
 use PhpParser\Node\Expr\Array_;
 use PhpParser\Node\Expr\ConstFetch;
+use PhpParser\Node\Expr\Variable;
 use PhpParser\Node\Name;
 use PhpParser\Node\Scalar\LNumber;
 use PhpParser\Node\Scalar\String_;
@@ -37,6 +38,8 @@ class ConvertToAstNodeTest extends TestCase
             $this->assertSame($expectedValue, $result->name->toString());
         } elseif ($result instanceof Array_) {
             $this->assertInstanceOf(Array_::class, $result);
+        } elseif ($result instanceof Variable) {
+            $this->assertSame($expectedValue, $result->name);
         }
     }
 
@@ -63,6 +66,9 @@ class ConvertToAstNodeTest extends TestCase
             // Booleans
             [true, ConstFetch::class, 'true'],
             [false, ConstFetch::class, 'false'],
+
+            // Variables
+            [new Variable('testVar'), Variable::class, 'testVar'],
         ];
     }
 
@@ -90,9 +96,6 @@ class ConvertToAstNodeTest extends TestCase
 
             // Resources
             [fopen('php://memory', 'r'), 'Unsupported value type for AST conversion: resource'],
-
-            // Null
-            [null, 'Unsupported value type for AST conversion: NULL'],
 
             // Floats
             [3.14, 'Unsupported value type for AST conversion: double'],
