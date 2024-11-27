@@ -1,5 +1,6 @@
 {
     "name": "quintenmbusiness/php-ast-code-generation-helper",
+    "keywords": ["ast", "php-parser", "code generation", "ast helper", "php code generator", "code generation tool"],
     "type": "library",
     "license": "MIT",
     "require": {
