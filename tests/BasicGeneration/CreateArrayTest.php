@@ -52,7 +52,7 @@ class CreateArrayTest extends TestCase
         $this->assertCount(2, $result->items);
 
         $this->assertInstanceOf(ArrayItem::class, $result->items[0]);
-        $this->assertInstanceOf(String_::class, $result->items[0]->key);
+        $this->assertInstanceOf(String_::class, $result->items[0]->value);
     }
 }
 
