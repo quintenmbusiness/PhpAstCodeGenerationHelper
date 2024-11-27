@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace quintenmbusiness\PhpAstCodeGenerationHelper\GeneratorHelpers;
 
+use PhpParser\Builder\Namespace_;
 use PhpParser\Node\Arg;
 use PhpParser\Node\Expr;
 use PhpParser\Builder\Method;
@@ -18,6 +19,9 @@ use PhpParser\Node\Name;
 use PhpParser\Node\Scalar\String_;
 use PhpParser\Node\Scalar\LNumber;
 use PhpParser\Node\Stmt\Return_;
+use PhpParser\Builder\Class_;
+use PhpParser\Builder\Interface_;
+use PhpParser\PrettyPrinter\Standard;
 
 class BasicGenerationHelper
 {
@@ -168,7 +172,6 @@ class BasicGenerationHelper
         };
     }
 
-
     /**
      * @param string|null $type
      * @param mixed $default
@@ -184,5 +187,35 @@ class BasicGenerationHelper
             'array' => is_array($default),
             default => false,
         };
+    }
+
+    /**
+     * Generates a PHP file for a given class, interface, or namespace.
+     *
+     * @param Class_|Interface_|Namespace_ $definition The class, interface, or namespace to generate.
+     * @param string|null $namespace The namespace of the class/interface (if $definition is not already a Namespace_).
+     * @param string $outputPath The file path where the generated file should be saved.
+     * @return void
+     */
+    public function generateFile(Class_|Interface_|Namespace_ $definition, ?string $namespace, string $outputPath): void
+    {
+        $prettyPrinter = new Standard();
+
+        // Convert builder to node if necessary
+        $node = $definition instanceof Namespace_
+            ? $definition->getNode()
+            : $this->factory->namespace($namespace)->addStmt($definition)->getNode();
+
+        // Generate the PHP code
+        $code = $prettyPrinter->prettyPrintFile([$node]);
+
+        // Ensure the directory exists
+        $directory = dirname($outputPath);
+        if (!is_dir($directory)) {
+            mkdir($directory, 0755, true);
+        }
+
+        // Save the generated code to the file
+        file_put_contents($outputPath, $code);
     }
 }
