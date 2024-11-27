@@ -25,7 +25,7 @@ class ConvertToAstNodeTest extends TestCase
     /**
      * @dataProvider validAstNodeProvider
      */
-    public function testConvertsValidValuesToAstNodes(mixed $value, string $expectedClass, mixed $expectedValue = null): void
+    public function test_converts_valid_values_to_ast_nodes(mixed $value, string $expectedClass, mixed $expectedValue = null): void
     {
         $result = $this->helper->convertToAstNode($value);
 
@@ -69,7 +69,7 @@ class ConvertToAstNodeTest extends TestCase
     /**
      * @dataProvider invalidAstNodeProvider
      */
-    public function testThrowsExceptionForInvalidValues(mixed $value, string $expectedMessage): void
+    public function test_throws_exception_for_invalid_values(mixed $value, string $expectedMessage): void
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage($expectedMessage);
