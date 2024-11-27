@@ -47,10 +47,11 @@ class ClassGenerationHelper extends MethodGenerationHelper
         $namespaceNode = $this->factory->namespace($namespace);
 
         foreach ($imports as $import) {
-            $namespaceNode->addStmt($this->factory->use($import));
+            $useStmt = $this->factory->use($import);
+            $namespaceNode->addStmt($useStmt);
         }
 
-        $namespaceNode->addStmt($class);
+        $namespaceNode->addStmt($class->getNode());
 
         return $namespaceNode;
     }
