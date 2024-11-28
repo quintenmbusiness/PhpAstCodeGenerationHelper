@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use quintenmbusiness\PhpAstCodeGenerationHelper\DemoGenerations\DemoClassGenerator;
-use quintenmbusiness\PhpAstCodeGenerationHelper\DemoGenerations\DemoClassTestGenerator;
+use DemoGenerations\DemoClassGenerator;
+use DemoGenerations\DemoClassTestGenerator;
 
 require_once __DIR__ . '/vendor/autoload.php';
 

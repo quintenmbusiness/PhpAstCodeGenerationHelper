@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
-namespace quintenmbusiness\PhpAstCodeGenerationHelper\DemoGenerations;
+namespace DemoGenerations;
 
 use PhpParser\BuilderFactory;
+use PhpParser\Node\Stmt\Expression;
 use quintenmbusiness\PhpAstCodeGenerationHelper\GeneratorHelpers\ClassGenerationHelper;
 
 class DemoClassGenerator
@@ -41,7 +42,7 @@ class DemoClassGenerator
                 'returnType' => 'void',
                 'params' => [['name' => 'value', 'type' => 'string']],
                 'body' => [
-                    new \PhpParser\Node\Stmt\Expression(
+                    new Expression(
                         $this->helper->assignThisVarToVar('exampleProperty', 'value')
                     ),
                 ],

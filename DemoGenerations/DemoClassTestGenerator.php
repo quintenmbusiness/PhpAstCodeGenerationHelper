@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace quintenmbusiness\PhpAstCodeGenerationHelper\DemoGenerations;
+namespace DemoGenerations;
 
 use PhpParser\Builder\Class_;
 use PhpParser\Builder\Namespace_;
