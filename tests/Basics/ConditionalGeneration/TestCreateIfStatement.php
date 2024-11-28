@@ -19,7 +19,6 @@ class TestCreateIfStatement extends TestCase
 
     protected function setUp(): void
     {
-        parent::setUp();
         $this->helper = new ConditionalGenerationHelper(new BuilderFactory());
     }
 
