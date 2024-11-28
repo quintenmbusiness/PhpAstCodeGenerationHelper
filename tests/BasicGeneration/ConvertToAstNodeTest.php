@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Basics\BasicGeneration;
+namespace BasicGeneration;
 
 use PhpParser\BuilderFactory;
 use PhpParser\Node\Expr\Array_;
