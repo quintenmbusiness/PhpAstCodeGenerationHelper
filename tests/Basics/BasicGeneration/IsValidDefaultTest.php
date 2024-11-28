@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace BasicGeneration;
+namespace Basics\BasicGeneration;
 
 use PhpParser\BuilderFactory;
 use PHPUnit\Framework\TestCase;

@@ -2,13 +2,12 @@
 
 declare(strict_types=1);
 
-namespace BasicGeneration;
+namespace Basics\BasicGeneration;
 
 use PhpParser\BuilderFactory;
 use PhpParser\Node\Expr\Array_;
 use PhpParser\Node\Expr\ConstFetch;
 use PhpParser\Node\Expr\Variable;
-use PhpParser\Node\Name;
 use PhpParser\Node\Scalar\LNumber;
 use PhpParser\Node\Scalar\String_;
 use PHPUnit\Framework\TestCase;

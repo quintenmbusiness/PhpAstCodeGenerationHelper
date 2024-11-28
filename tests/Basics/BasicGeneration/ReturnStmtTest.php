@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace BasicGeneration;
+namespace Basics\BasicGeneration;
 
-use PhpParser\Node\Expr;
 use PhpParser\BuilderFactory;
-use PHPUnit\Framework\TestCase;
+use PhpParser\Node\Expr;
 use PhpParser\Node\Expr\Variable;
 use PhpParser\Node\Stmt\Return_;
 use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\TestCase;
 use quintenmbusiness\PhpAstCodeGenerationHelper\GeneratorHelpers\BasicGenerationHelper;
 
 class ReturnStmtTest extends TestCase

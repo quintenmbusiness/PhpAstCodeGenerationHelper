@@ -12,7 +12,7 @@ use PhpParser\Node\Expr\Assign;
 use PhpParser\Node\Expr\Variable;
 use PhpParser\Node\Expr\PropertyFetch;
 
-class VariableGenerationHelper extends BasicGenerationHelper
+class VariableGenerationHelper extends ConditionalGenerationHelper
 {
     /**
      * @param BuilderFactory $factory

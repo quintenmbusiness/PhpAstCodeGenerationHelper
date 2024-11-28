@@ -2,13 +2,11 @@
 
 declare(strict_types=1);
 
-namespace BasicGeneration;
+namespace Basics\BasicGeneration;
 
-use PHPUnit\Framework\TestCase;
 use PhpParser\BuilderFactory;
+use PHPUnit\Framework\TestCase;
 use quintenmbusiness\PhpAstCodeGenerationHelper\GeneratorHelpers\BasicGenerationHelper;
-use PhpParser\Builder\Class_;
-use PhpParser\Builder\Interface_;
 
 class GenerateFileTest extends TestCase
 {
