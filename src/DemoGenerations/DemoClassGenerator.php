@@ -25,6 +25,29 @@ class DemoClassGenerator
             mkdir($outputDir, 0755, true);
         }
 
+        $methods = [
+            [
+                'name' => 'getExampleProperty',
+                'visibility' => 'public',
+                'returnType' => 'string',
+                'params' => [],
+                'body' => [
+                    $this->helper->return($this->helper->thisVar('exampleProperty')),
+                ],
+            ],
+            [
+                'name' => 'setExampleProperty',
+                'visibility' => 'public',
+                'returnType' => 'void',
+                'params' => [['name' => 'value', 'type' => 'string']],
+                'body' => [
+                    new \PhpParser\Node\Stmt\Expression(
+                        $this->helper->assignThisVarToVar('exampleProperty', 'value')
+                    ),
+                ],
+            ],
+        ];
+
         // Generate the class
         $class = $this->helper->createFullClass(
             'ExampleClass',
@@ -39,26 +62,7 @@ class DemoClassGenerator
             constructorParams: [
                 ['name' => 'param1', 'type' => 'string', 'default' => 'default'],
             ],
-            methods: [
-                [
-                    'name' => 'getExampleProperty',
-                    'visibility' => 'public',
-                    'returnType' => 'string',
-                    'params' => [],
-                    'body' => [
-                        $this->helper->return($this->helper->thisVar('exampleProperty')),
-                    ],
-                ],
-                [
-                    'name' => 'setExampleProperty',
-                    'visibility' => 'public',
-                    'returnType' => 'void',
-                    'params' => [['name' => 'value', 'type' => 'string']],
-                    'body' => [
-                        $this->helper->assignThisVarToVar('exampleProperty', 'value'),
-                    ],
-                ],
-            ],
+            methods: $methods,
         );
 
         $this->helper->generateFile($class, 'quintenmbusiness\PhpAstCodeGenerationHelper\DemoGenerations\generated_examples', $outputPath);

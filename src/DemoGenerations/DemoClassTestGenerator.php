@@ -7,7 +7,6 @@ namespace quintenmbusiness\PhpAstCodeGenerationHelper\DemoGenerations;
 use PhpParser\Builder\Class_;
 use PhpParser\Builder\Namespace_;
 use PhpParser\BuilderFactory;
-use PhpParser\Node\Expr\New_;
 use PhpParser\Node\Name;
 use PhpParser\Node\Stmt\Use_;
 use PhpParser\Node\UseItem;
@@ -39,7 +38,7 @@ class DemoClassTestGenerator
             $methods["test_$assertion"] = $this->helper->createTestMethod(
                 "test_$assertion",
                 [
-                    $this->helper->createAssertion($assertion, $exampleArgs),
+                    $this->helper->createAssertion($assertion, array_values($exampleArgs)), // Ensure indexed array
                 ]
             );
         }
@@ -60,6 +59,9 @@ class DemoClassTestGenerator
         echo "Test class generated at: $outputPath" . PHP_EOL;
     }
 
+    /**
+     * @param array<int, string> $imports
+     */
     private function addImports(Class_ $class, array $imports): Namespace_
     {
         $factory = new BuilderFactory();
@@ -74,6 +76,9 @@ class DemoClassTestGenerator
         return $namespaceBuilder;
     }
 
+    /**
+     * @return array<string, array<int, mixed>>
+     */
     private function getPhpUnitAssertions(): array
     {
         return [
