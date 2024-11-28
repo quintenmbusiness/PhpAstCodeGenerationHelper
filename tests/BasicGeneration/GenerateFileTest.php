@@ -53,6 +53,22 @@ class GenerateFileTest extends TestCase
         unlink($outputPath);
     }
 
+    public function test_generates_namespace_file(): void
+    {
+        $namespaceBuilder = (new BuilderFactory())->namespace('TestNamespace');
+        $outputPath = sys_get_temp_dir() . '/TestNamespace.php';
+
+        $this->helper->generateFile($namespaceBuilder, null, $outputPath);
+
+        $this->assertFileExists($outputPath);
+
+        $content = file_get_contents($outputPath);
+        $this->assertStringContainsString('namespace TestNamespace;', $content);
+
+        unlink($outputPath);
+    }
+
+
     public function test_creates_directory_if_not_exists(): void
     {
         $class = (new BuilderFactory())->class('ExampleClass');
