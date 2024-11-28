@@ -23,7 +23,7 @@ class DemoClassTestGenerator
 
     public function generate(): void
     {
-        $outputDir = __DIR__ . '/generated_examples';
+        $outputDir = __DIR__ . '/../../generated_examples';
         $outputPath = $outputDir . '/ExampleTest.php';
 
         if (!is_dir($outputDir)) {

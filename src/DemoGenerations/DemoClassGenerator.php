@@ -18,7 +18,7 @@ class DemoClassGenerator
 
     public function generate(): void
     {
-        $outputDir = __DIR__ . '/generated_examples';
+        $outputDir = __DIR__ . '/../../generated_examples';
         $outputPath = $outputDir . '/ExampleClass.php';
 
         if (!is_dir($outputDir)) {
