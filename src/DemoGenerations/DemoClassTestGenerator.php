@@ -4,7 +4,13 @@ declare(strict_types=1);
 
 namespace quintenmbusiness\PhpAstCodeGenerationHelper\DemoGenerations;
 
+use PhpParser\Builder\Class_;
+use PhpParser\Builder\Namespace_;
 use PhpParser\BuilderFactory;
+use PhpParser\Node\Expr\New_;
+use PhpParser\Node\Name;
+use PhpParser\Node\Stmt\Use_;
+use PhpParser\Node\UseItem;
 use quintenmbusiness\PhpAstCodeGenerationHelper\GeneratorHelpers\TestGenerationHelper;
 
 class DemoClassTestGenerator
@@ -25,33 +31,73 @@ class DemoClassTestGenerator
             mkdir($outputDir, 0755, true);
         }
 
+        // Generate test methods for all PHPUnit assertions
+        $assertions = $this->getPhpUnitAssertions();
+        $methods = [];
+
+        foreach ($assertions as $assertion => $exampleArgs) {
+            $methods["test_$assertion"] = $this->helper->createTestMethod(
+                "test_$assertion",
+                [
+                    $this->helper->createAssertion($assertion, $exampleArgs),
+                ]
+            );
+        }
+
         // Generate the test class
         $testClass = $this->helper->createTestClass(
             'ExampleTest',
-            methods: [
-                'test_example_property' => $this->helper->createTestMethod(
-                    'test_example_property',
-                    [
-                        $this->helper->createAssertion('assertTrue', [true]),
-                        $this->helper->createAssertion(
-                            'assertInstanceOf',
-                            ['ExampleClass::class', new \PhpParser\Node\Expr\New_(new \PhpParser\Node\Name('ExampleClass'))]
-                        ),
-                    ]
-                ),
-            ],
-            setupBody: [
-                $this->helper->createAssertion(
-                    'assertInstanceOf',
-                    ['ExampleClass::class', new \PhpParser\Node\Expr\New_(new \PhpParser\Node\Name('ExampleClass'))]
-                ),
-            ]
+            methods: $methods,
         );
 
-        $this->helper->addTestImports($testClass);
+        // Add imports explicitly
+        $namespaceNode = $this->addImports($testClass, [
+            'PHPUnit\Framework\TestCase',
+        ]);
 
-        $this->helper->generateFile($testClass, 'GeneratedExamples', $outputPath);
+        $this->helper->generateFile($namespaceNode, 'quintenmbusiness\PhpAstCodeGenerationHelper\DemoGenerations\generated_examples', $outputPath);
 
         echo "Test class generated at: $outputPath" . PHP_EOL;
+    }
+
+    private function addImports(Class_ $class, array $imports): Namespace_
+    {
+        $factory = new BuilderFactory();
+        $namespaceBuilder = $factory->namespace('quintenmbusiness\PhpAstCodeGenerationHelper\DemoGenerations\generated_examples');
+
+        foreach ($imports as $import) {
+            $namespaceBuilder->addStmt(new Use_([new UseItem(new Name($import))]));
+        }
+
+        $namespaceBuilder->addStmt($class->getNode());
+
+        return $namespaceBuilder;
+    }
+
+    private function getPhpUnitAssertions(): array
+    {
+        return [
+            'assertTrue' => [true],
+            'assertFalse' => [false],
+            'assertEquals' => [42, 42],
+            'assertNotEquals' => [42, 43],
+            'assertSame' => ['value', 'value'],
+            'assertNotSame' => ['value', 'otherValue'],
+            'assertNull' => [null],
+            'assertNotNull' => [true],
+            'assertEmpty' => [[]],
+            'assertNotEmpty' => [[1, 2, 3]],
+            'assertCount' => [3, [1, 2, 3]],
+            'assertGreaterThan' => [5, 10],
+            'assertGreaterThanOrEqual' => [10, 10],
+            'assertLessThan' => [10, 5],
+            'assertLessThanOrEqual' => [5, 5],
+            'assertStringContainsString' => ['example', 'example string'],
+            'assertStringNotContainsString' => ['not', 'example string'],
+            'assertStringStartsWith' => ['start', 'start of string'],
+            'assertStringEndsWith' => ['end', 'string end'],
+            'assertArrayHasKey' => ['key', ['key' => 'value']],
+            'assertArrayNotHasKey' => ['missingKey', ['key' => 'value']],
+        ];
     }
 }

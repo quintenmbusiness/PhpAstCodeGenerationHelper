@@ -5,12 +5,11 @@ declare(strict_types=1);
 namespace quintenmbusiness\PhpAstCodeGenerationHelper\DemoGenerations;
 
 use PhpParser\BuilderFactory;
-use quintenmbusiness\PhpAstCodeGenerationHelper\GeneratorHelpers\BasicGenerationHelper;
 use quintenmbusiness\PhpAstCodeGenerationHelper\GeneratorHelpers\ClassGenerationHelper;
 
 class DemoClassGenerator
 {
-    private BasicGenerationHelper $helper;
+    private ClassGenerationHelper $helper;
 
     public function __construct()
     {
@@ -29,7 +28,7 @@ class DemoClassGenerator
         // Generate the class
         $class = $this->helper->createFullClass(
             'ExampleClass',
-            'GeneratedExamples',
+            'quintenmbusiness\PhpAstCodeGenerationHelper\DemoGenerations\generated_examples',
             properties: [
                 'exampleProperty' => [
                     'type' => 'string',
@@ -60,12 +59,9 @@ class DemoClassGenerator
                     ],
                 ],
             ],
-            traits: ['GeneratedExamples\ExampleTrait'],
-            implements: ['GeneratedExamples\ExampleInterface'],
-            imports: ['GeneratedExamples\ExampleTrait', 'GeneratedExamples\ExampleInterface']
         );
 
-        $this->helper->generateFile($class, 'GeneratedExamples', $outputPath);
+        $this->helper->generateFile($class, 'quintenmbusiness\PhpAstCodeGenerationHelper\DemoGenerations\generated_examples', $outputPath);
 
         echo "Class generated at: $outputPath" . PHP_EOL;
     }

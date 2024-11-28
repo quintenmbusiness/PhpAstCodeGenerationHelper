@@ -1,12 +1,9 @@
 <?php
 
-namespace GeneratedExamples;
+namespace quintenmbusiness\PhpAstCodeGenerationHelper\DemoGenerations\generated_examples;
 
-use GeneratedExamples\ExampleTrait;
-use GeneratedExamples\ExampleInterface;
-class ExampleClass implements GeneratedExamples\ExampleInterface
+class ExampleClass
 {
-    use GeneratedExamples\ExampleTrait;
     public string $exampleProperty = 'default value';
     public function __construct(string $param1 = 'default')
     {
