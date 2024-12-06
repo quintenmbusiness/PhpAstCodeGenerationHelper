@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace BasicGeneration;
 
-use PhpParser\BuilderFactory;
 use PhpParser\Builder\Method;
 use PhpParser\Builder\Property;
+use PhpParser\BuilderFactory;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use quintenmbusiness\PhpAstCodeGenerationHelper\GeneratorHelpers\BasicGenerationHelper;
