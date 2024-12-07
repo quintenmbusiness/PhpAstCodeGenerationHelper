@@ -26,12 +26,13 @@ class MethodGenerationHelper extends VariableGenerationHelper
      * @param ComplexType|Identifier|Name|string|null $type
      * @return Method
      */
-    public function createMethod(string $name, string $visibility = 'public', ComplexType|Identifier|Name|string $type = null): Method {
+    public function createMethod(string $name, string $visibility = 'public', ComplexType|Identifier|Name|string $type = null): Method
+    {
         $method = new Method($name);
 
         $this->addVisibility($method, $visibility);
 
-        if($type !== null) {
+        if ($type !== null) {
             $method->setReturnType($type);
         }
 

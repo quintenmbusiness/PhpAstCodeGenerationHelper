@@ -1,6 +1,7 @@
 {
     "name": "quintenmbusiness/php-ast-code-generation-helper",
     "keywords": ["ast", "php-parser", "code generation", "ast helper", "php code generator", "code generation tool"],
+    "description": "A PHP library for generating Abstract Syntax Tree (AST) nodes programmatically, simplifying code generation with nikic/php-parser.",
     "type": "library",
     "license": "MIT",
     "require": {
@@ -23,6 +24,7 @@
         "run-generators": "php run_generators.php"
     },
     "require-dev": {
-        "phpstan/phpstan": "^2.0"
+        "phpstan/phpstan": "^2.0",
+        "friendsofphp/php-cs-fixer": "^3.65"
     }
 }

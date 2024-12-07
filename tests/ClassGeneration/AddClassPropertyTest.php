@@ -42,7 +42,7 @@ class AddClassPropertyTest extends TestCase
         $this->assertSame($expectedVisibility, $this->getVisibilityAsString($stmts[0]));
         if ($expectedDefault !== null) {
             if (is_array($expectedDefault)) {
-                $items = array_map(fn($item) => $item->value->value, $stmts[0]->props[0]->default->items);
+                $items = array_map(fn ($item) => $item->value->value, $stmts[0]->props[0]->default->items);
                 $this->assertSame($expectedDefault, $items);
             } else {
                 $this->assertSame($expectedDefault, $stmts[0]->props[0]->default->value);

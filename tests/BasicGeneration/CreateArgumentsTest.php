@@ -9,7 +9,6 @@ use PhpParser\Node\Arg;
 use PhpParser\Node\Expr\Array_;
 use PhpParser\Node\Scalar\LNumber;
 use PhpParser\Node\Scalar\String_;
-use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use quintenmbusiness\PhpAstCodeGenerationHelper\GeneratorHelpers\BasicGenerationHelper;
 
@@ -22,8 +21,7 @@ class CreateArgumentsTest extends TestCase
         $this->helper = new BasicGenerationHelper(new BuilderFactory());
     }
 
-    #[Test]
-    public function it_creates_arguments_from_simple_values(): void
+    public function test_creates_arguments_from_simple_values(): void
     {
         $args = [42, 'string'];
 
@@ -39,8 +37,7 @@ class CreateArgumentsTest extends TestCase
         $this->assertEquals('string', $result[1]->value->value);
     }
 
-    #[Test]
-    public function it_creates_arguments_from_nested_array(): void
+    public function test_creates_arguments_from_nested_array(): void
     {
         $args = [['key' => 'value', 42]];
 

@@ -78,7 +78,7 @@ class CreateClassPropertyTest extends TestCase
             $defaultNode = $property->getNode()->props[0]->default;
             if ($defaultNode instanceof Array_) {
                 $this->assertIsArray($expectedDefault);
-                $items = array_map(fn(ArrayItem $item) => $item->value->value, $defaultNode->items);
+                $items = array_map(fn (ArrayItem $item) => $item->value->value, $defaultNode->items);
                 $this->assertSame($expectedDefault, $items);
             } elseif ($defaultNode instanceof Scalar\DNumber || $defaultNode instanceof Scalar\LNumber || $defaultNode instanceof Scalar\String_) {
                 $this->assertSame($expectedDefault, $defaultNode->value);
