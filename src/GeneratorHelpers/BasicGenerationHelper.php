@@ -39,6 +39,8 @@ class BasicGenerationHelper
     }
 
     /**
+     * Creates a return statement using a passed Expr
+     *
      * @param  Expr    $expr
      * @return Return_
      */

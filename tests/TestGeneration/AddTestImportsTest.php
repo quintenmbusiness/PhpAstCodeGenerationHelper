@@ -27,7 +27,7 @@ class AddTestImportsTest extends TestCase
 
         // Filter only Use_ statements
         $importStatements = array_values(
-            array_filter($namespaceNode->stmts, fn($stmt) => $stmt instanceof Use_)
+            array_filter($namespaceNode->stmts, fn ($stmt) => $stmt instanceof Use_)
         );
 
         // Assertions
@@ -45,7 +45,7 @@ class AddTestImportsTest extends TestCase
 
         // Filter only Use_ statements
         $importStatements = array_values(
-            array_filter($namespaceNode->stmts, fn($stmt) => $stmt instanceof Use_)
+            array_filter($namespaceNode->stmts, fn ($stmt) => $stmt instanceof Use_)
         );
 
         // Assertions

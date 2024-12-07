@@ -9,7 +9,6 @@ use PhpParser\Node\Expr\Array_;
 use PhpParser\Node\Expr\ArrayItem;
 use PhpParser\Node\Scalar\LNumber;
 use PhpParser\Node\Scalar\String_;
-use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use quintenmbusiness\PhpAstCodeGenerationHelper\GeneratorHelpers\BasicGenerationHelper;
 
@@ -22,8 +21,7 @@ class CreateArrayTest extends TestCase
         $this->helper = new BasicGenerationHelper(new BuilderFactory());
     }
 
-    #[Test]
-    public function it_creates_array_node_from_indexed_array(): void
+    public function test_creates_array_node_from_indexed_array(): void
     {
         $array = [42, 'string'];
 
@@ -41,8 +39,7 @@ class CreateArrayTest extends TestCase
         $this->assertEquals('string', $result->items[1]->value->value);
     }
 
-    #[Test]
-    public function it_creates_array_node_from_associative_array(): void
+    public function test_creates_array_node_from_associative_array(): void
     {
         $array = ['key' => 'value', 42 => 'answer'];
 
@@ -55,4 +52,3 @@ class CreateArrayTest extends TestCase
         $this->assertInstanceOf(String_::class, $result->items[0]->value);
     }
 }
-
